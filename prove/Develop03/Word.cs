@@ -1,15 +1,15 @@
 public class Word
 {
-    public string _text = "";
-    public bool _isHidden = false;
+    private string _text = "";
+    private bool _isHidden = false;
     public Word(string word)
     {
         _text = word;
     }
     public void HideWord()
     {
-        _isHidden = true;  
-    } 
+        _isHidden = true;
+    }
     public bool IsHidden()
     {
         return _isHidden;

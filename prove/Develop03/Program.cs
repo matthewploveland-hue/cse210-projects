@@ -11,8 +11,7 @@ class Program
         while (scripture.EndProgram() == false)
         {
             Console.Clear();
-            scripture.DisplayReference();
-            scripture.DisplayText();
+            scripture.DisplayScripture();
             Console.WriteLine();
             Console.Write("Press enter to continue or type 'quit' to finish: ");
             string endResponse = Console.ReadLine().ToLower();
@@ -24,9 +23,7 @@ class Program
 
         }
         Console.Clear();
-        scripture.DisplayReference();
-        scripture.DisplayText();
-        
+        scripture.DisplayScripture();
     }
 }
 // The way I stretched this assignment is by adding a small library

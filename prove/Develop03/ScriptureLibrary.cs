@@ -36,7 +36,7 @@ public class ScriptureLibrary
             {
                 volumeName = "Old Testament";
             }
-            // find the right verses and madd them to a list    
+            // find the right verses and add them to a list    
             string fileName = "scripture_library.txt";
             string[] lines = System.IO.File.ReadAllLines(fileName);
             foreach (string line in lines)

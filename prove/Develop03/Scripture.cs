@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.Runtime;
 public class Scripture
 {
-    public List<Word> _scripture = [];
-    public Reference _scriptureReference = new Reference();
+    private Reference _scriptureReference;
+    private List<Word> _scripture = [];
     public Scripture(string randomVerse)
-    {       
+    {
         string[] verseParts = randomVerse.Split("|");
-        _scriptureReference._volume = verseParts[0];
-        _scriptureReference._book = verseParts[1];
         int intChapter = Convert.ToInt32(verseParts[2]);
-        _scriptureReference._chapter = intChapter;
         int intStartVerse = Convert.ToInt32(verseParts[3]);
-        _scriptureReference._startVerse = intStartVerse;
         int intEndVerse = Convert.ToInt32(verseParts[4]);
-        _scriptureReference._endVerse = intEndVerse;
+        _scriptureReference = new Reference(verseParts[1],intChapter,intStartVerse,intEndVerse);
         string verse = verseParts[5];
         string[] words = verse.Split(" ");
         foreach (string word in words)
@@ -24,31 +20,26 @@ public class Scripture
             _scripture.Add(w);
         }
     }
-    public void DisplayReference()
-    {   
-        if (_scriptureReference._endVerse != _scriptureReference._startVerse)
-        {
-            Console.WriteLine($"{_scriptureReference._book} {_scriptureReference._chapter}:{_scriptureReference._startVerse}-{_scriptureReference._endVerse}");
-        }
-        else
-        {
-            Console.WriteLine($"{_scriptureReference._book} {_scriptureReference._chapter}:{_scriptureReference._startVerse}");
-        }
-    }
-    public void DisplayText()
+
+    private void DisplayText()
     {
-        
+
         foreach (Word currentWord in _scripture)
         {
             Console.Write($" {currentWord.GetDisplayText()} ");
-        }        
-    } 
+        }
+    }
+    public void DisplayScripture()
+    {
+        _scriptureReference.DisplayReference();
+        DisplayText();
+    }
     public void HideRandomWords()
     {
         int wordAmount = _scripture.Count;
         int done = 0;
         int visibleCount = 0;
-        
+
         foreach (Word word in _scripture)
         {
             if (word.IsHidden() == false)
@@ -60,10 +51,10 @@ public class Scripture
         while (done < finalTarget)
         {
             int randomWordPlacement = Random.Shared.Next(0, wordAmount);
-            if (_scripture[randomWordPlacement]._isHidden == false)
+            if (_scripture[randomWordPlacement].IsHidden() == false)
             {
                 _scripture[randomWordPlacement].HideWord();
-                done ++;   
+                done++;
             }
         }
     }
@@ -73,12 +64,12 @@ public class Scripture
 
         foreach (Word word in _scripture)
         {
-            if (word._isHidden == false)
+            if (word.IsHidden() == false)
             {
                 endProgram = false;
                 break;
             }
         }
         return endProgram;
-    } 
+    }
 }
