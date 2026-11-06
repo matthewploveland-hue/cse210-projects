@@ -1,0 +1,4 @@
+how does the breathing one work?
+and the display start message, shall each class have a separate 
+start message because they have individual text, or what?
+where 
