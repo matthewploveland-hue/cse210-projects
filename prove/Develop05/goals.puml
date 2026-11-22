@@ -1,0 +1,45 @@
+@startuml Scripture
+
+class Program {
+    + Main() : void
+    + DisplayMenu() : void
+}
+class GoalManager {
+    - _goals : List<Goal> 
+    + CreateGoal() : 
+    + SaveGoal() : void
+    + LoadGoal() : void
+    + DisplayGoal() : void
+    + RecordEvent() : string
+}
+class Goal {
+    
+    - _points : int
+    - _name : string
+    - _description : string
+    - _isCompleted : bool
+    + GetPoints() : int
+    + GetName() : string
+    + GetDescription() : string
+    + AddPoints() : int
+    + GetStringDetails() : string
+}
+
+class SimpleGoal {
+}
+
+class EternalGoal {
+}
+
+class ChecklistGoal {
+    - _numOfTimes : int
+    - _currentNumOfTimes : int
+}
+
+Program <|-- GoalManager
+GoalManager <|-- Goal
+Goal <|-- SimpleGoal
+Goal <|-- EternalGoal
+Goal <|-- ChecklistGoal
+
+@enduml
